@@ -706,9 +706,9 @@ EipStatus GetAttributeAll(CipInstance *instance,
 int EncodeEPath(CipEpath *epath, EipUint8 **message) {
   unsigned int length = epath->path_size;
   //AddIntToMessage(epath->path_size, message);
-  **message = 0; /*8Bit path_size */
-  ++(*message);
-  **message = (EipUint8)epath->path_size;
+  //**message = 0; /*8Bit path_size */
+  //++(*message);
+  //**message = (EipUint8)epath->path_size;
   //++(*message);
 
   if (epath->class_id < 256) {
@@ -760,7 +760,7 @@ int EncodeEPath(CipEpath *epath, EipUint8 **message) {
     }
   }
 
-  return 2 + epath->path_size * 2; /* path size is in 16 bit chunks according to the specification */
+  return /*2 + */epath->path_size * 2; /* path size is in 16 bit chunks according to the specification */
 }
 
 int DecodePaddedEPath(CipEpath *epath, EipUint8 **message) {
@@ -769,9 +769,6 @@ int DecodePaddedEPath(CipEpath *epath, EipUint8 **message) {
 
   epath->path_size = *(EipUint8 *)(message_runner + 1);
   message_runner += 2;
-
-  if (*message_runner == 0) //temporal, solucion chapu
-	  message_runner++;
 
   /* copy path to structure, in version 0.1 only 8 bit for Class,Instance and Attribute, need to be replaced with function */
   epath->class_id = 0;
