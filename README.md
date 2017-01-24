@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/EIPStackGroup/OpENer.svg?branch=master)](https://travis-ci.org/EIPStackGroup/OpENer)
+
+[![Stories in Ready](https://badge.waffle.io/EIPStackGroup/OpENer.svg?label=ready&title=Ready)](http://waffle.io/EIPStackGroup/OpENer)
+[![Stories in In Progress](https://badge.waffle.io/EIPStackGroup/OpENer.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/EIPStackGroup/OpENer)
+
 OpENer Version 1.2.0
 ====================
 
@@ -8,6 +13,14 @@ OpENer is an EtherNet/IP&trade; stack for I/O adapter devices; supports multiple
 I/O and explicit connections; includes objects and services to make EtherNet/IP&trade;-
 compliant products defined in THE ETHERNET/IP SPECIFICATION and published by 
 ODVA (http://www.odva.org).
+
+Participate!
+------------
+Users and developers of OpENer can join the respective Google Groups in order to exchange experience, discuss the usage of OpENer, and to suggest new features and CIP objects, which would be useful for the community.
+
+Developers mailing list: https://groups.google.com/forum/#!forum/eip-stack-group-opener-developers
+
+Users mailing list: https://groups.google.com/forum/#!forum/eip-stack-group-opener-users
 
 Requirements:
 -------------
@@ -42,9 +55,9 @@ Compile for POSIX:
 	3. Invoke make
 	4. For invoking opener type:
 
-		./opener ipaddress subnetmask gateway domainname hostaddress macaddress
+		./OpENer ipaddress subnetmask gateway domainname hostaddress macaddress
 
-		e.g. ./opener 192.168.0.2 255.255.255.0 192.168.0.1 test.com testdevice 00 15 C5 BF D0 87
+		e.g. ./OpENer 192.168.0.2 255.255.255.0 192.168.0.1 test.com testdevice 00 15 C5 BF D0 87
  
 2. Within Eclipse
 	1. For a standard configuration invoke setup_posix.sh, otherwise start
@@ -73,6 +86,7 @@ Directory structure:
 		- ports ... the platform specific code
 		- utils ... utility functions
 	- tests ... the test source code
+		- enet_encap ... tests for Ethernet encapsulation layer
 		- utils ... tests for utility functions
 
 Documentation:
@@ -88,5 +102,15 @@ Porting OpENer:
 For porting OpENer to new platforms please see the porting section in the 
 Doxygen documentation.
 
+Contributing to OpENer:
+-----------------------
+The easiest way is to fork the repository, then create a feature/bugfix branch.
+After finishing your feature/bugfix create a pull request and explain your changes.
+Also, please update and/or add doxygen comments to the provided code sections.
+Please stick to the coding conventions, as defined in source/doc/coding_rules
+The easiest way to conform to the indenting convertion is to set uncrustify as git filter in the OpENer repository, which can be done with the following to commands:
+
+git config filter.uncrustify.clean=/path/to/uncrustify/uncrustify -c uncrustify.cfg --mtime --no-backup
+git config filter.uncrustify.smudge=cat
 
 

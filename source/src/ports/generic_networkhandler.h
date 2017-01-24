@@ -11,6 +11,9 @@
  *  @attention This file should only be used for implementing port-specific network handlers and is not intended to grant other parts of the OpENer access to the network layer
  */
 
+#ifndef GENERIC_NETWORKHANDLER_H_
+#define GENERIC_NETWORKHANDLER_H_
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -21,6 +24,7 @@
 #include "endianconv.h"
 #include "cipconnectionmanager.h"
 #include "networkhandler.h"
+#include "appcontype.h"
 
 #define MAX_NO_OF_TCP_SOCKETS 10
 
@@ -43,7 +47,6 @@ int g_current_active_tcp_socket;
 struct timeval g_time_value;
 MilliSeconds g_actual_time;
 MilliSeconds g_last_time;
-
 /** @brief Struct representing the current network status
  *
  */
@@ -92,3 +95,5 @@ EipBool8 CheckSocketSet(int socket);
  * @return Highest socket id from the provided sockets
  */
 int GetMaxSocket(int socket1, int socket2, int socket3, int socket4);
+
+#endif /* GENERIC_NETWORKHANDLER_H_ */

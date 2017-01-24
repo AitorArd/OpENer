@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2009, Rockwell Automation, Inc.
- * All rights reserved. 
+ * All rights reserved.
  *
  ******************************************************************************/
 #ifndef OPENER_USER_CONF_H_
@@ -8,9 +8,9 @@
 
 /** @file opener_user_conf.h
  * @brief OpENer configuration setup
- * 
+ *
  * This file contains the general application specific configuration for OpENer.
- * 
+ *
  * Furthermore you have to specific platform specific network include files.
  * OpENer needs definitions for the following data-types
  * and functions:
@@ -25,6 +25,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <sys/select.h>
+#include <assert.h>
 
 #include "typedefs.h"
 
@@ -116,28 +117,34 @@ static const int kOpenerProducedDataHasRunIdleHeader = 0;
 /** @brief A specialized assertion command that will log the assertion and block
  *  further execution in an while(1) loop.
  */
+#ifdef IDLING_ASSERT
 #define OPENER_ASSERT(assertion) \
-    do { \
-      if(!(assertion)) { \
-        LOG_TRACE("Assertion \"%s\" failed: file \"%s\", line %d\n", #assertion, __FILE__, __LINE__); \
-        while(1){;} \
-      } \
-    } while(0)
+  do { \
+    if( !(assertion) ) { \
+      LOG_TRACE("Assertion \"%s\" failed: file \"%s\", line %d\n", \
+                # assertion, \
+                __FILE__, \
+                __LINE__); \
+      while(1) {; } \
+    } \
+  } while(0)
 
 /* else use standard assert() */
 //#include <assert.h>
 //#include <stdio.h>
 //#define OPENER_ASSERT(assertion) assert(assertion)
 #else
+#define OPENER_ASSERT(assertion) assert(assertion)
+#endif
+#else
 
-/* for release builds execute the assertion, but don't test it */
-#define OPENER_ASSERT(assertion) (assertion)
+/* for release builds remove assertion */
+#define OPENER_ASSERT(assertion)
 
-/* the above may result in "statement with no effect" warnings.
- *  If you do not use assert()s to run functions, the an empty
- *  macro can be used as below
+/* if there are any strange timing issues, you can try the version below, where the assertion is performed but the assert
+ * function is not used
  */
-//#define OPENER_ASSERT(assertion)
+//#define OPENER_ASSERT(assertion) (assertion)
 /* else if you still want assertions to stop execution but without tracing, use the following */
 //#define OPENER_ASSERT(assertion) do { if(!(assertion)) { while(1){;} } } while (0)
 /* else use standard assert() */

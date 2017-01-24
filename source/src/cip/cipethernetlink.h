@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Copyright (c) 2009, Rockwell Automation, Inc.
- * All rights reserved. 
+ * All rights reserved.
  *
  ******************************************************************************/
 #ifndef OPENER_CIPETHERNETLINK_H_
@@ -13,6 +13,8 @@
 
 /* public functions */
 /** @brief Initialize the Ethernet Link Objects data
+ *
+ *  @return kEipStatusOk if initialization was successful, otherwise kEipStatusError
  */
 EipStatus CipEthernetLinkInit(void);
 

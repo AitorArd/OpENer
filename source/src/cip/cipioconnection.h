@@ -52,8 +52,9 @@
  *    - EIP_OK ... on success
  *    - On an error the general status code to be put into the response
  */
-int EstablishIoConnction(ConnectionObject *connection_object,
-                         EipUint16 *extended_error);
+EipStatus EstablishIoConnection(
+  ConnectionObject *RESTRICT const connection_object,
+  EipUint16 *const extended_error);
 
 /** @brief Take the data given in the connection object structure and open the necessary communication channels
  *
@@ -63,7 +64,7 @@ int EstablishIoConnction(ConnectionObject *connection_object,
  *    - EIP_OK ... on success
  *    - On an error the general status code to be put into the response
  */
-int OpenCommunicationChannels(ConnectionObject *connection_object);
+EipStatus OpenCommunicationChannels(ConnectionObject *connection_object);
 
 /** @brief close the communication channels of the given connection and remove it
  * from the active connections list.
@@ -71,7 +72,7 @@ int OpenCommunicationChannels(ConnectionObject *connection_object);
  * @param connection_object pointer to the connection object data
  */
 void CloseCommunicationChannelsAndRemoveFromActiveConnectionsList(
-    ConnectionObject *connection_object);
+  ConnectionObject *connection_object);
 
 extern EipUint8 *g_config_data_buffer;
 extern unsigned int g_config_data_length;
